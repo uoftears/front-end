@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleSubmit = e => {
@@ -21,6 +22,14 @@ function Login() {
       isError = true;
     }
 
+    if (password !== confirmPassword) {
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        confirmPassword: "Passwords do not match"
+      }));
+      isError = true;
+    }
+
     if (!isError) {
       // login acction
     }
@@ -29,7 +38,7 @@ function Login() {
   useEffect(() => {
     // Reset error when password or email changed
     if (Object.keys(errors).length) setErrors({});
-  }, [password, email]);
+  }, [email, password, confirmPassword]);
 
   return (
     <form
@@ -38,7 +47,7 @@ function Login() {
       noValidate
     >
       <div className="text-center">
-        <h3>U of Tears Login</h3>
+        <h3>U of Tears Signup</h3>
       </div>
       <div
         className="form-group mt-3"
@@ -87,18 +96,38 @@ function Login() {
           </div>
         </div>
       </div>
+
+      <div
+        className="form-group"
+        style={{ position: "relative", marginBottom: 30 }}
+      >
+        <label>Confirm Password</label>
+        <div>
+          <input
+            type="password"
+            className={classnames({
+              "form-control": true,
+              "is-invalid": !!errors.confirmPassword
+            })}
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+          />
+          <div
+            className="invalid-feedback mt-0"
+            style={{ position: "absolute" }}
+          >
+            {errors.confirmPassword}
+          </div>
+        </div>
+      </div>
+
       <div className="text-center" style={{ marginTop: 40 }}>
         <button type="submit" className="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div className="text-center mt-3">
-        <button type="button" className="btn btn-link">
-          forgot password
+          Signup
         </button>
       </div>
     </form>
   );
 }
 
-export default Login;
+export default Signup;
