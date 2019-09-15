@@ -1,0 +1,24 @@
+label {
+  font-weight: bold;
+}
+
+i {
+  transition: transform 0.35s ease;
+  cursor: pointer;
+  color: grey;
+}
+
+i.expanded {
+  transform: rotate(180deg);
+}
+
+.course-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.course-name:hover {
+  color: blue;
+}

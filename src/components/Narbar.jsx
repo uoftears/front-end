@@ -21,8 +21,8 @@ export default function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/item1" activeClassName="active">
-              item 1
+            <NavLink className="nav-link" to="/course" activeClassName="active">
+              Course
             </NavLink>
           </li>
           <li className="nav-item">
