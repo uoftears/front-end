@@ -82,7 +82,14 @@ function SearchBar({ searchValue, setSearchValue, setNumberPerPage, setSchool, s
             </option>
           ))}
         </select>
-        <select className='form-control form-control-sm' style={{ width: 80 }} onChange={e => setNumberPerPage(e.target.value)}>
+        <select
+          className='form-control form-control-sm'
+          style={{ width: 80 }}
+          onChange={e => {
+            setNumberPerPage(e.target.value);
+            setPageNumber(1);
+          }}
+        >
           <option value={10}>10</option>
           <option value={20}>20</option>
           <option value={30}>30</option>
