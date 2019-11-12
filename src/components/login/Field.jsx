@@ -58,7 +58,14 @@ function Field ({ label, type, error, value, onChange, placeholder, ...rest }) {
   return (
     <Wrapper isInvalid={isInvalid}>
       {Boolean(label) && <Label>{label}</Label>}
-      <Input type={type} value={value} onChange={onChange} placeholder={placeholder} {...rest} isInvalid={isInvalid} />
+      <Input
+        type={type}
+        value={value}
+        onChange={onChange}
+        isInvalid={isInvalid}
+        placeholder={placeholder}
+        {...rest}
+      />
       {Boolean(error) && <Error>{error}</Error>}
     </Wrapper>
   )

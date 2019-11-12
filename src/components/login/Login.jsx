@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Field, { Title, ForgetPass, Button, Form } from './Field'
+import Field, { Title, ForgetPass, Button, Form } from "./Field";
+import FaceBookConnectButton from "./FaceBookConnectButton";
+import GoogleConnectButton from "./GoogleConnectButton";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-function Login () {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -36,16 +39,20 @@ function Login () {
     value: email,
     error: errors.email,
     placeholder: "Email",
-    onChange: e => setEmail(e.target.value),
-  }
+    onChange: e => setEmail(e.target.value)
+  };
 
   const passwordProps = {
     type: "password",
     value: password,
     error: errors.password,
     placeholder: "Password",
-    onChange: e => setPassword(e.target.value),
-  }
+    onChange: e => setPassword(e.target.value)
+  };
+
+  const responseFacebook = response => {
+    console.log(response);
+  };
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
@@ -57,23 +64,17 @@ function Login () {
 
       <Field {...passwordProps} />
 
-      <ForgetPass type="button">
-        Forgot password?
-      </ForgetPass>
+      <ForgetPass type='button'>Forgot password?</ForgetPass>
 
-      <Button style={{ marginTop: 40 }} block>
+      <Button type='submit' style={{ marginTop: 40 }} block>
         Login
       </Button>
 
-      <div style={{ textAlign: 'center', margin: '10px' }}>OR</div>
+      <div style={{ textAlign: "center", margin: "10px" }}>OR</div>
 
-      <Button type="button" style={{ margin: '10px 0' }} block>
-        Continue With Facebook
-      </Button>
-      <Button type="button" block>
-        Continue With Google
-      </Button>
+      <FacebookLogin appId='563571351148080' fields='name,email,picture' callback={responseFacebook} render={props => <FaceBookConnectButton onClick={props.onClick} />} />
 
+      <GoogleConnectButton />
     </Form>
   );
 }
